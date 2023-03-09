@@ -1,22 +1,27 @@
-import logo from './logo.svg';
 import './App.css';
+import { useState } from 'react';
+// import { Trulioo } from "@trulioo/docv"
 
 function App() {
+  
+  const [shortCode, setShortCode] = useState("");
+  const [savedShortCode, setSavedShortCode] = useState("");
+  
+  const handleOnClick = (code) => {
+    setSavedShortCode(shortCode);
+  };
+  
   return (
-    <div className="App">
+    <div className="min-h-screen bg-gray-100">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <form>
+          <label>
+            <input type="text" name="name" onInput={(e) => setShortCode(e.currentTarget.value)}/>
+          </label>
+          <input type="submit" value="Submit" onClick={() => handleOnClick(shortCode)}/>
+          <div>{savedShortCode}</div>
+        </form>
+        {}
       </header>
     </div>
   );
