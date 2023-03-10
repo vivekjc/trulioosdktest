@@ -1,5 +1,5 @@
 import './App.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {Trulioo, event} from "@trulioo/docv"
 import logo from "./img/logo.png"
 
@@ -11,9 +11,9 @@ function App() {
   const elementID = "trulioo-sdk" // The HTML element id to attach to
   const host = "https://main.d2uvagyudr35kr.amplifyapp.com/" // Set the QR Code redirect url host
   
-  // const queryString = window.location.search;
-  // const urlParams = new URLSearchParams(queryString);
-  // const shortCodeParam = urlParams.get("code");
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  const shortCodeParam = urlParams.get("code");
   
   const initTruliooSdk = (code) => {
     
@@ -50,9 +50,13 @@ function App() {
       )
   }
   
-  // if (shortCodeParam !== null) {
-  //   initTruliooSdk(shortCodeParam) // Use the obtained short code from the url param
-  // }
+  useEffect(() => {
+    if (shortCodeParam !== null) {
+      initTruliooSdk(shortCodeParam) // Use the obtained short code from the url param
+    }
+  }, [shortCodeParam])
+  
+  
   
   const handleOnClick = (e, code) => {
     e.preventDefault();
@@ -76,7 +80,7 @@ function App() {
           type="submit" value="Go" />
           <div>{savedShortCode}</div>
         </form>
-        <div id="trulioo-sdk" class="bg-white-100"/>
+        <div id="trulioo-sdk" class="bg-white-100n"/>
     </header>
     </div>
   );
