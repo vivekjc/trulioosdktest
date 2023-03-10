@@ -1,5 +1,5 @@
 import './App.css';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import {Trulioo, event} from "@trulioo/docv"
 
 function App() {
@@ -7,16 +7,13 @@ function App() {
   const [shortCode, setShortCode] = useState("");
   const [savedShortCode, setSavedShortCode] = useState("");
   
-  const handleOnClick = (code) => {
-    setSavedShortCode(shortCode);
-  };
-  
   const elementID = "trulioo-sdk" // The HTML element id to attach to
   
-  useEffect(() => {
+  const initTruliooSdk = (code) => {
+    
     // Setup the workflow configuration
     const workflowOption = Trulioo.workflow()
-    .setShortCode(savedShortCode)
+    .setShortCode(code)
     
     // Setup callbacks to get results and debugging errors
     const callbacks = new event.adapters.ListenerCallback({
@@ -44,8 +41,12 @@ function App() {
       .catch(error =>
           console.error("Error:", error)
       )
-  }, [savedShortCode]);
+  }
   
+  const handleOnClick = (code) => {
+    setSavedShortCode(code);
+    initTruliooSdk(code);
+  };
   
   return (
     <div className="min-h-screen bg-gray-100">
@@ -58,10 +59,10 @@ function App() {
               name="name" 
               onInput={(e) => setShortCode(e.currentTarget.value)}/>
           </label>
-          <input class="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" type="button" value="Go" onClick={() => handleOnClick(shortCode)}/>
+          <input class="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" 
+          type="button" value="Go" onClick={() => handleOnClick(shortCode)}/>
           <div>{savedShortCode}</div>
         </form>
-        
         <div id="trulioo-sdk" />
       </header>
     </div>
