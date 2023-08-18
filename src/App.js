@@ -10,6 +10,7 @@ function App() {
   
   const elementID = "trulioo-sdk" // The HTML element id to attach to
   const host = "https://main.d2uvagyudr35kr.amplifyapp.com/" // Set the QR Code redirect url host
+  const alternateHost = "https://google.com"
   
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
@@ -20,7 +21,7 @@ function App() {
     // Setup the workflow configuration
     const workflowOption = Trulioo.workflow()
     .setShortCode(code)
-    .setRedirectUrl(host)
+    .setRedirectUrl(alternateHost)
     
     // Setup callbacks to get results and debugging errors
     const callbacks = new event.adapters.ListenerCallback({
