@@ -9,7 +9,7 @@ function App() {
   const [savedShortCode, setSavedShortCode] = useState("");
   
   const elementID = "trulioo-sdk" // The HTML element id to attach to
-  const host = "https://mobile.d2uvagyudr35kr.amplifyapp.com/" // Set the QR Code redirect url host
+  const host = "https://main.d2uvagyudr35kr.amplifyapp.com/" // Set the QR Code redirect url host
   const alternateHost = "https://google.com"
   
   const queryString = window.location.search;
