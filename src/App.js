@@ -14,7 +14,7 @@ function App() {
   
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
-  const shortCodeParam = urlParams.get("code");
+  const shortCodeParam = urlParams.get("input");
   
   const initTruliooSdk = (code) => {
     
